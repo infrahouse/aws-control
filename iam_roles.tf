@@ -11,7 +11,7 @@ resource "aws_iam_role" "github-admin" {
           Principal = {
             AWS = [
               aws_iam_user.aleks.arn,
-              aws_iam_user.tf_github.arn,
+              module.tf_admins["tf_github"].arn
             ]
           }
         },
@@ -44,7 +44,7 @@ resource "aws_iam_role" "s3-admin" {
           Principal = {
             AWS = [
               aws_iam_user.aleks.arn,
-              aws_iam_user.tf_s3.arn,
+              module.tf_admins["tf_s3"].arn,
             ]
           }
         },
