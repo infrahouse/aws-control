@@ -2,7 +2,6 @@
 
 The repository defines basic AWS configuration:
 
-* S3 buckets for Terraform states
 * IAM groups
 * IAM users
 * IAM roles
@@ -29,11 +28,6 @@ The `aws-admin` group is for all human users. A member of this group can assume 
 ## Roles
 
 * `github-admin` - a role that anyone who wants to make a GitHub change
-
-# S3
-
-S3 buckets for Terraform states
-
 
 # DynamoDB
 
