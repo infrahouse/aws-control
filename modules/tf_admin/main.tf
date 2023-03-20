@@ -8,7 +8,7 @@ resource "aws_iam_access_key" "tf_admin" {
 }
 
 resource "aws_secretsmanager_secret" "tf_admin" {
-  name                    = "_github_control__tf_admin/${var.username}"
+  name                    = "${var.gh_secrets_namespace}tf_admin/${var.username}"
   recovery_window_in_days = 0
   tags                    = var.tags
 }
