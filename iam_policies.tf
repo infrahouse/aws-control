@@ -73,7 +73,7 @@ resource "aws_iam_policy" "TFAdminForGitHub" {
             "secretsmanager:GetSecretValue"
           ],
           "Resource" : [
-            "arn:aws:secretsmanager:*:990466748045:secret:_github_control__*"
+            "arn:aws:secretsmanager:*:990466748045:secret:${aws_ssm_parameter.gh_secrets_namespace.insecure_value}*"
           ]
         }
       ]

@@ -7,6 +7,7 @@ module "tf_admins" {
       "tf_s3"
     ]
   )
-  username = each.key
-  tags     = merge(local.common_tags)
+  gh_secrets_namespace = aws_ssm_parameter.gh_secrets_namespace.insecure_value
+  username             = each.key
+  tags                 = merge(local.common_tags)
 }
