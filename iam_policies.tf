@@ -70,7 +70,8 @@ resource "aws_iam_policy" "TFAdminForGitHub" {
             "secretsmanager:DeleteSecret",
             "secretsmanager:DescribeSecret",
             "secretsmanager:GetResourcePolicy",
-            "secretsmanager:GetSecretValue"
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:ListSecrets"
           ],
           "Resource" : [
             "arn:aws:secretsmanager:*:${local.aws_account_id}:secret:${aws_ssm_parameter.gh_secrets_namespace.insecure_value}*"
