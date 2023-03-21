@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket  = "infrahouse-aws-control"
+    bucket  = "infrahouse8-aws-control"
     key     = "terraform.tfstate"
     region  = "us-west-1"
     profile = "infrahouse8"
