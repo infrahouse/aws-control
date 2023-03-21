@@ -79,6 +79,13 @@ resource "aws_iam_policy" "TFAdminForGitHub" {
         {
           "Effect" : "Allow",
           "Action" : [
+            "secretsmanager:ListSecrets"
+          ],
+          "Resource" : ["*"]
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
             "ssm:GetParameter",
           ],
           "Resource" : [
