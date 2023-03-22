@@ -63,3 +63,35 @@ resource "aws_iam_role_policy_attachment" "s3-admin-dynamodb-locks" {
   policy_arn = aws_iam_policy.dynamodb-lock.arn
   role       = aws_iam_role.s3-admin.name
 }
+
+
+resource "aws_iam_role" "aws-admin" {
+  name = "aws-admin"
+  assume_role_policy = jsonencode(
+    {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action = "sts:AssumeRole"
+          Effect = "Allow"
+          Sid    = ""
+          Principal = {
+            AWS = [
+              aws_iam_user.aleks.arn,
+              module.tf_admins["tf_aws"].arn,
+            ]
+          }
+        },
+      ]
+    }
+  )
+  tags = merge(local.common_tags)
+}
+
+data "aws_iam_policy" "AdministratorAccess" {
+  name = "AdministratorAccess"
+}
+resource "aws_iam_role_policy_attachment" "aws-admin" {
+  policy_arn = data.aws_iam_policy.AdministratorAccess.arn
+  role       = aws_iam_role.aws-admin.name
+}
