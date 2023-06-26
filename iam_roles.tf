@@ -77,8 +77,7 @@ resource "aws_iam_role" "aws-admin" {
           Sid    = ""
           Principal = {
             AWS = [
-              aws_iam_user.aleks.arn,
-              module.tf_admins["tf_aws"].arn,
+              aws_iam_user.aleks.arn
             ]
           }
         },

@@ -8,10 +8,7 @@ resource "aws_iam_policy" "TFAWSAdmin" {
         {
           "Effect" : "Allow",
           "Action" : "sts:AssumeRole",
-          "Resource" : [
-            aws_iam_role.github-admin.arn,
-            aws_iam_role.s3-admin.arn
-          ]
+          "Resource" : ["*"]
         },
       ]
     }
