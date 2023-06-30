@@ -1,16 +1,25 @@
 provider "aws" {
-  profile = "infrahouse8"
-  region  = "us-west-1"
+  alias  = "aws-990466748045-uw1"
+  region = "us-west-1"
+  assume_role {
+    role_arn = "arn:aws:iam::990466748045:role/ih-tf-terraform-control"
+  }
+  default_tags {
+    tags = {
+      "created_by" : "infrahouse/aws-control-990466748045" # GitHub repository that created a resource
+    }
+  }
 }
 
 provider "aws" {
-  profile = "infrahouse8"
-  region  = "us-west-1"
-  alias   = "uw1"
-}
-
-provider "aws" {
-  profile = "infrahouse8"
-  region  = "us-west-2"
-  alias   = "uw2"
+  alias  = "aws-990466748045-uw2"
+  region = "us-west-2"
+  assume_role {
+    role_arn = "arn:aws:iam::990466748045:role/ih-tf-terraform-control"
+  }
+  default_tags {
+    tags = {
+      "created_by" : "infrahouse/aws-control-990466748045" # GitHub repository that created a resource
+    }
+  }
 }

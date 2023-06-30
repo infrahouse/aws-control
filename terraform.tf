@@ -1,11 +1,11 @@
 terraform {
   backend "s3" {
-    bucket  = "infrahouse8-aws-control"
-    key     = "terraform.tfstate"
-    region  = "us-west-1"
-    profile = "infrahouse8"
+    bucket   = "infrahouse-aws-control-990466748045"
+    key      = "terraform.tfstate"
+    region   = "us-west-1"
+    role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control"
 
-    dynamodb_table = "infrahouse-aws-control-locks"
+    dynamodb_table = "infrahouse-terraform-state-locks"
     encrypt        = true
   }
   required_providers {
