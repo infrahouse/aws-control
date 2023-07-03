@@ -5,7 +5,7 @@ module "ih-tf-aws-control-990466748045-admin" {
   providers = {
     aws = aws.aws-990466748045-uw1
   }
-  gh_identity_provider_arn = aws_iam_openid_connect_provider.github.arn
+  gh_identity_provider_arn = module.github-connector.gh_openid_connect_provider_arn
   repo_name                = "aws-control"
   state_bucket             = "infrahouse-aws-control-990466748045"
 }
