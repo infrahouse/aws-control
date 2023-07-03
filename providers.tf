@@ -2,7 +2,7 @@ provider "aws" {
   alias  = "aws-990466748045-uw1"
   region = "us-west-1"
   assume_role {
-    role_arn = "arn:aws:iam::990466748045:role/ih-tf-terraform-control"
+    role_arn = "arn:aws:iam::990466748045:role/ih-tf-aws-control-admin"
   }
   default_tags {
     tags = {
@@ -15,7 +15,7 @@ provider "aws" {
   alias  = "aws-990466748045-uw2"
   region = "us-west-2"
   assume_role {
-    role_arn = "arn:aws:iam::990466748045:role/ih-tf-terraform-control"
+    role_arn = "arn:aws:iam::990466748045:role/ih-tf-aws-control-admin"
   }
   default_tags {
     tags = {
