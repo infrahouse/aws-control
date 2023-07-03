@@ -3,7 +3,7 @@ terraform {
     bucket   = "infrahouse-aws-control-990466748045"
     key      = "terraform.tfstate"
     region   = "us-west-1"
-    role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control"
+    role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager"
 
     dynamodb_table = "infrahouse-terraform-state-locks"
     encrypt        = true
@@ -11,7 +11,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.56"
+      version = "~> 4.67"
     }
   }
 }

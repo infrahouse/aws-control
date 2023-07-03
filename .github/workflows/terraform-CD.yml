@@ -1,16 +1,19 @@
 ---
-name: 'Terraform CI'
+name: 'Terraform CD'
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
+    types:
+      - closed
 
 permissions:
   id-token: write  # This is required for requesting the JWT
   contents: read
 
 jobs:
-  terraform:
-    name: 'Terraform Plan'
+  apply:
+    name: 'Terraform Apply'
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 5
@@ -31,7 +34,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::990466748045:role/ih-tf-aws-control-github
-          role-session-name: github-action-aws-control-ci
+          role-session-name: github-action-aws-control-cd
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       # Install the latest version of Terraform CLI
@@ -42,9 +45,14 @@ jobs:
       - name: Setup Python Environment
         run: make bootstrap-ci
 
-      # Run all required linters
-      - name: Code Style Check
-        run: make lint
+      # Download a plan from the approved pull request
+      - name: Download plan
+        run: |
+          ih-plan \
+            --aws-assume-role-arn "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager" \
+            download \
+            plans/${{ github.event.pull_request.number }}.plan \
+            tf.plan
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -55,17 +63,14 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      # Generates an execution plan for Terraform
-      - name: Terraform Plan
+      # Execute the plan
+      - name: Terraform Apply
         run: |
-          make plan
-          ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
+          make apply
 
-      # Upload Terraform Plan
-      - name: Upload Terraform Plan
+      - name: Remove plan
         run: |
           ih-plan \
             --aws-assume-role-arn "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager" \
-            upload \
-            --key-name=plans/${{ github.event.pull_request.number }}.plan \
-            tf.plan
+            remove \
+            plans/${{ github.event.pull_request.number }}.plan
