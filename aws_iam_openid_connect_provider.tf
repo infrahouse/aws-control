@@ -1,5 +1,6 @@
 module "github-connector" {
-  source = "github.com/infrahouse/terraform-aws-gh-identity-provider"
+  source  = "infrahouse/gh-identity-provider/aws"
+  version = "~> 1.0"
   providers = {
     aws = aws.aws-990466748045-uw1
   }
