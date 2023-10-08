@@ -6,7 +6,6 @@ data "aws_iam_policy_document" "aws-admin" {
       type = "AWS"
       identifiers = [
         aws_iam_user.aleks.arn,
-        aws_iam_user.tmp.arn
       ]
     }
   }
