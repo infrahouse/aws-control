@@ -3,7 +3,7 @@ resource "aws_iam_user" "tmp" {
   name     = "tmp"
 }
 
-resource "aws_iam_access_key" "aleks" {
+resource "aws_iam_access_key" "tmp" {
   provider = aws.aws-990466748045-uw1
   user     = aws_iam_user.tmp.name
 }
