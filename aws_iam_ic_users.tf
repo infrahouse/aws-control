@@ -16,3 +16,9 @@ resource "aws_identitystore_user" "aleks" {
     value   = "aleks@infrahouse.com"
   }
 }
+
+resource "aws_identitystore_group_membership" "aleks" {
+  identity_store_id = local.identity_store_id
+  group_id          = aws_identitystore_group.sso["AWSControlTowerAdmins"].group_id
+  member_id         = aws_identitystore_user.aleks.user_id
+}
