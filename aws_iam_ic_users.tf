@@ -23,8 +23,8 @@ locals {
   ]
 }
 resource "aws_identitystore_group_membership" "aleks" {
-  for_each          = local.aleks_groups
-  identity_store_id = toset(local.identity_store_id)
+  for_each          = toset(local.aleks_groups)
+  identity_store_id = local.identity_store_id
   group_id          = aws_identitystore_group.sso[each.key].group_id
   member_id         = aws_identitystore_user.aleks.user_id
 }
