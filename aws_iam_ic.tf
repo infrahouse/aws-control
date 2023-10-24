@@ -1,6 +1,6 @@
 resource "aws_identitystore_user" "aleks" {
   provider          = aws.aws-990466748045-uw1
-  identity_store_id = local.instance_arn
+  identity_store_id = local.identity_store_id
 
   display_name = "Oleksandr Kuzminskyi"
   user_name    = "aleks"
@@ -11,6 +11,8 @@ resource "aws_identitystore_user" "aleks" {
   }
 
   emails {
-    value = "aleks@infrahouse.com"
+    primary = true
+    type    = "work"
+    value   = "aleks@infrahouse.com"
   }
 }
