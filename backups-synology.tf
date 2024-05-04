@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "synology-permissions" {
       "glacier:*"
     ]
     resources = [
-      "*"
+      "arn:aws:glacier:us-west-1:990466748045:vaults/SynologyNAS*"
     ]
   }
 }
