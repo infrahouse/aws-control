@@ -16,16 +16,10 @@ data "aws_iam_policy_document" "synology-permissions" {
   }
   statement {
     actions = [
-      "glacier:InitiateJob",
-      "glacier:AbortMultipartUpload",
-      "glacier:CompleteMultipartUpload",
-      "glacier:InitiateMultipartUpload",
-      "glacier:UploadMultipartPart",
-      "sts:GetCallerIdentity",
-      "glacier:UploadArchive"
+      "glacier:*"
     ]
     resources = [
-      aws_glacier_vault.synology.arn
+      "*"
     ]
   }
 }
