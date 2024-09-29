@@ -1,5 +1,5 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "$schema": "https://raw.githubusercontent.com/infrahouse8/renovate/refs/heads/main/renovate-schema.json",
   "extends": [
     "config:recommended"
   ]
