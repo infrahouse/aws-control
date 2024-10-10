@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   id-token: write  # This is required for requesting the JWT
   contents: read
+  pull-requests: write  # needed for InfraHouse tool (to make PR comments)
 
 jobs:
   terraform:
@@ -15,7 +16,7 @@ jobs:
     environment: production
     timeout-minutes: 5
     env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
