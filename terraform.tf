@@ -1,9 +1,12 @@
 terraform {
   backend "s3" {
-    bucket   = "infrahouse-aws-control-990466748045"
-    key      = "terraform.tfstate"
-    region   = "us-west-1"
-    role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager"
+    bucket = "infrahouse-aws-control-990466748045"
+    key    = "terraform.tfstate"
+    region = "us-west-1"
+    assume_role = {
+      role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager"
+    }
+
 
     dynamodb_table = "infrahouse-terraform-state-locks"
     encrypt        = true
