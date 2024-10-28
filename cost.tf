@@ -12,9 +12,12 @@ resource "aws_cloudwatch_metric_alarm" "daily0spend" {
   alarm_actions = [
     aws_sns_topic.cost_notifications.arn
   ]
+<<<<<<< HEAD
   depends_on = [
     aws_sns_topic.cost_notifications
   ]
+=======
+>>>>>>> d8e7d9f (move cost alert to us-east-1)
 }
 
 resource "aws_sns_topic" "cost_notifications" {
