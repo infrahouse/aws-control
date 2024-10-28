@@ -12,6 +12,9 @@ resource "aws_cloudwatch_metric_alarm" "daily0spend" {
   alarm_actions = [
     aws_sns_topic.cost_notifications.arn
   ]
+  depends_on = [
+    aws_sns_topic.cost_notifications
+  ]
 }
 
 resource "aws_sns_topic" "cost_notifications" {
