@@ -1,14 +1,29 @@
 resource "aws_cloudwatch_metric_alarm" "daily-spend" {
   provider            = aws.aws-990466748045-ue1
   alarm_name          = "daily_cost"
-  namespace           = "AWS/Billing"
-  metric_name         = "EstimatedCharges"
   comparison_operator = "GreaterThanThreshold"
   threshold           = 10
-  period              = 6 * 3600
   evaluation_periods  = 1
-  statistic           = "Maximum"
   datapoints_to_alarm = 1
+
+  metric_query {
+    id          = "e1"
+    expression  = "RATE(m1) * 24 * 3600"
+    label       = "Daily cost"
+    return_data = "true"
+  }
+
+  metric_query {
+    id = "m1"
+    metric {
+      metric_name = "EstimatedCharges"
+      namespace   = "AWS/Billing"
+      period      = 24 * 3600
+      stat        = "Maximum"
+      # unit        = "USD"
+    }
+  }
+
   alarm_actions = [
     aws_sns_topic.cost_notifications.arn
   ]
