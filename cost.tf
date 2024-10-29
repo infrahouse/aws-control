@@ -7,21 +7,23 @@ resource "aws_cloudwatch_metric_alarm" "daily-spend" {
   datapoints_to_alarm = 1
 
   metric_query {
-    id          = "e1"
-    expression  = "RATE(m1) * 24 * 3600"
-    label       = "Daily cost"
-    return_data = "true"
-  }
-
-  metric_query {
     id = "m1"
     metric {
       metric_name = "EstimatedCharges"
       namespace   = "AWS/Billing"
       period      = 24 * 3600
       stat        = "Maximum"
-      # unit        = "USD"
+      dimensions = {
+        "Currency" = "USD"
+      }
     }
+  }
+
+  metric_query {
+    id          = "e1"
+    expression  = "RATE(m1) * 24 * 3600"
+    label       = "Daily cost"
+    return_data = true
   }
 
   alarm_actions = [
