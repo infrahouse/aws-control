@@ -2,7 +2,7 @@ resource "aws_cloudwatch_metric_alarm" "daily-spend" {
   provider            = aws.aws-990466748045-ue1
   alarm_name          = "daily_cost"
   comparison_operator = "GreaterThanThreshold"
-  threshold           = 10
+  threshold           = 18
   evaluation_periods  = 1
   datapoints_to_alarm = 1
 
