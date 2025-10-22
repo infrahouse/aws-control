@@ -6,5 +6,6 @@ module "cost-alert" {
   version            = "~> 1.0"
   alert_name         = "[infrahouse]: AWS daily cost"
   cost_threshold     = 18
+  period_hours       = 24
   notification_email = "aleks@infrahouse.com"
 }
