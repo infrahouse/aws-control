@@ -6,10 +6,6 @@ resource "aws_iam_user" "backuper" {
   name = aws_s3_bucket.dst.bucket
 }
 
-resource "aws_iam_access_key" "backuper" {
-  user = aws_iam_user.backuper.name
-}
-
 data "aws_iam_policy_document" "backuper-permissions" {
   statement {
     actions = [
