@@ -6,3 +6,9 @@ data "aws_ssoadmin_instances" "sso" {
   provider = aws.aws-990466748045-uw1
 }
 
+data "aws_iam_roles" "sso_admin" {
+  provider    = aws.aws-990466748045-uw1
+  path_prefix = "/aws-reserved/sso.amazonaws.com/"
+  name_regex  = "AWSReservedSSO_AWSAdministratorAccess_.*"
+}
+
