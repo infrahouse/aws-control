@@ -3,10 +3,6 @@ resource "aws_iam_user" "synology" {
   name = "synology"
 }
 
-resource "aws_iam_access_key" "synology" {
-  user = aws_iam_user.synology.name
-}
-
 data "aws_iam_policy_document" "synology-permissions" {
   statement {
     actions = [
@@ -39,16 +35,6 @@ resource "aws_iam_policy" "synology" {
 resource "aws_iam_user_policy_attachment" "synology" {
   policy_arn = aws_iam_policy.synology.arn
   user       = aws_iam_user.synology.name
-}
-
-output "synology-access-key" {
-  value     = aws_iam_access_key.synology.id
-  sensitive = true
-}
-
-output "synology-secret-key" {
-  value     = aws_iam_access_key.synology.secret
-  sensitive = true
 }
 
 # Glacier
