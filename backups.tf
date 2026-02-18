@@ -5,11 +5,3 @@ module "mediapc" {
   }
 
 }
-
-output "mediapc-bucket" {
-  value = module.mediapc.bucket
-}
-
-output "mediapc-region" {
-  value = module.mediapc.aws_region
-}
