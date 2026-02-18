@@ -5,12 +5,7 @@ resource "aws_iam_user" "synology" {
 
 data "aws_iam_policy_document" "synology-permissions" {
   statement {
-    actions = [
-      "sts:GetCallerIdentity",
-    ]
-    resources = ["*"]
-  }
-  statement {
+    sid = "AllowGlacierBackupOperations"
     actions = [
       "glacier:AbortMultipartUpload",
       "glacier:CompleteMultipartUpload",
@@ -32,6 +27,7 @@ data "aws_iam_policy_document" "synology-permissions" {
     ]
   }
   statement {
+    sid = "AllowListVaults"
     actions = [
       "glacier:ListVaults"
     ]
