@@ -11,6 +11,7 @@ module "ih-tf-aws-control-990466748045-admin" {
   state_bucket             = "infrahouse-aws-control-990466748045"
   gh_org_name              = "infrahouse"
   admin_allowed_arns = [
-    local.me_arn
+    local.me_arn,
+    tolist(data.aws_iam_roles.sso_admin.arns)[0],
   ]
 }
