@@ -3,7 +3,7 @@ resource "aws_iam_user" "synology" {
   name = "synology"
 }
 
-data "aws_iam_policy_document" "synology-permissions" {
+data "aws_iam_policy_document" "synology_permissions" {
   statement {
     sid = "AllowGlacierBackupOperations"
     actions = [
@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "synology-permissions" {
 resource "aws_iam_policy" "synology" {
   name        = "synology-glacier-backup"
   description = "Allows Synology NAS to manage Glacier backups"
-  policy      = data.aws_iam_policy_document.synology-permissions.json
+  policy      = data.aws_iam_policy_document.synology_permissions.json
 }
 
 resource "aws_iam_user_policy_attachment" "synology" {

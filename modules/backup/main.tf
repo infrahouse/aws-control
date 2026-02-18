@@ -10,7 +10,7 @@ resource "aws_iam_user" "backuper" {
   name = module.dst.bucket_name
 }
 
-data "aws_iam_policy_document" "backuper-permissions" {
+data "aws_iam_policy_document" "backuper_permissions" {
   statement {
     actions = [
       "s3:ListBucket"
@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "backuper-permissions" {
 }
 
 resource "aws_iam_policy" "backuper" {
-  policy = data.aws_iam_policy_document.backuper-permissions.json
+  policy = data.aws_iam_policy_document.backuper_permissions.json
 }
 
 resource "aws_iam_user_policy_attachment" "backuper" {
