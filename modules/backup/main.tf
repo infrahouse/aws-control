@@ -1,9 +1,13 @@
-resource "aws_s3_bucket" "dst" {
-  bucket_prefix = "twindb"
+module "dst" {
+  source  = "registry.infrahouse.com/infrahouse/s3-bucket/aws"
+  version = "0.3.1"
+
+  bucket_prefix     = "twindb"
+  enable_versioning = true
 }
 
 resource "aws_iam_user" "backuper" {
-  name = aws_s3_bucket.dst.bucket
+  name = module.dst.bucket_name
 }
 
 data "aws_iam_policy_document" "backuper-permissions" {
@@ -12,7 +16,7 @@ data "aws_iam_policy_document" "backuper-permissions" {
       "s3:ListBucket"
     ]
     resources = [
-      aws_s3_bucket.dst.arn
+      module.dst.bucket_arn
     ]
   }
   statement {
@@ -22,7 +26,7 @@ data "aws_iam_policy_document" "backuper-permissions" {
       "s3:DeleteObject"
     ]
     resources = [
-      "${aws_s3_bucket.dst.arn}/*"
+      "${module.dst.bucket_arn}/*"
     ]
   }
 }
