@@ -38,7 +38,9 @@ data "aws_iam_policy_document" "synology-permissions" {
 }
 
 resource "aws_iam_policy" "synology" {
-  policy = data.aws_iam_policy_document.synology-permissions.json
+  name        = "synology-glacier-backup"
+  description = "Allows Synology NAS to manage Glacier backups"
+  policy      = data.aws_iam_policy_document.synology-permissions.json
 }
 
 resource "aws_iam_user_policy_attachment" "synology" {
