@@ -1,34 +1,56 @@
 # aws-control
 
-The repository defines basic AWS configuration:
+Terraform configuration managing core AWS infrastructure in the
+InfraHouse control account (990466748045).
 
-* IAM groups
-* IAM users
-* IAM roles
-* IAM policies
+## What it manages
 
+* IAM users, roles, groups, and policies
+* AWS SSO (Identity Center) configuration
+* Backup infrastructure (Synology Glacier vault, S3 backup buckets)
+* Cost alerts
+* GitHub Actions OIDC integration for CI/CD
 
-# IAM
+## Local Development
 
-## Groups
+### Prerequisites
 
-The `aws-admin` group is for all human users. A member of this group can assume one of allowed IAM roles.
+* Terraform (version in `.terraform-version`)
+* AWS SSO access to the control account with `AWSAdministratorAccess`
 
+### Authenticate via SSO
 
-## Users
+```bash
+aws sso login --profile infrahouse-root-AWSAdministratorAccess
+```
 
-* `aleks` - me
-* `tf_github` - a user that runs GitHub CI/CD
+### Export credentials
 
-## Policies
+Use `ih-aws` to export SSO credentials into your shell:
 
-* `TFAWSAdmin` - defines what roles can assume an entity that has this policy (`aws-admin`).
-* `TFAdminForGitHub` - what a GitHub role can do.
+```bash
+eval $(ih-aws --aws-profile infrahouse-root-AWSAdministratorAccess credentials -e)
+```
 
-## Roles
+### Run plan
 
-* `github-admin` - a role that anyone who wants to make a GitHub change
+```bash
+make plan
+```
 
-# DynamoDB
+This runs `terraform init` followed by `terraform plan` with
+`configuration.tfvars`.
 
-`terraform_locks` is a dynamodb table used for Terraform state locks.
+### Apply
+
+```bash
+make apply
+```
+
+Applies the saved plan from `tf.plan`.
+
+## CI/CD
+
+* **PR**: Lint, validate, plan, publish plan comment (`terraform-CI.yml`)
+* **Merge**: Download saved plan, apply (`terraform-CD.yml`)
+* Authentication uses OIDC (GitHub -> AWS IAM role `ih-tf-aws-control-github`)
