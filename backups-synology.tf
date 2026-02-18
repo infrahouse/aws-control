@@ -15,6 +15,7 @@ data "aws_iam_policy_document" "synology-permissions" {
       "glacier:AbortMultipartUpload",
       "glacier:CompleteMultipartUpload",
       "glacier:CreateVault",
+      "glacier:DeleteArchive",
       "glacier:DescribeJob",
       "glacier:DescribeVault",
       "glacier:GetJobOutput",
