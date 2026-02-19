@@ -27,7 +27,6 @@ module "ih_tf_aws_control_493370826424" {
   ]
   allowed_arns = [
     "arn:aws:iam::289256138624:role/ih-tf-aws-control-303467602807-state-manager-read-only",
-    "arn:aws:iam::303467602807:role/ih-tf-aws-control-303467602807-read-only",
   ]
 }
 

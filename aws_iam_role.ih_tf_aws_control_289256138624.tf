@@ -23,6 +23,7 @@ module "ih_tf_aws_control_289256138624" {
   terraform_locks_table_arn = module.state_bucket_289256138624.lock_table_arn
   trusted_arns = [
     tolist(data.aws_iam_roles.sso_admin.arns)[0],
+    "arn:aws:iam::303467602807:role/ih-tf-github-control-github",
     "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-github",
   ]
 }
