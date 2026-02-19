@@ -26,6 +26,23 @@ module "ih_tf_aws_control_303467602807" {
   ]
 }
 
+# Read-only state access for 493370826424 to read 303467602807 state
+module "ih_tf_aws_control_303467602807_state_manager_read_only" {
+  source  = "infrahouse/state-manager/aws"
+  version = "1.4.2"
+  providers = {
+    aws = aws.aws-289256138624-uw1
+  }
+  name = "ih-tf-aws-control-303467602807-state-manager-read-only"
+  assuming_role_arns = [
+    "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-github",
+    tolist(data.aws_iam_roles.sso_admin.arns)[0],
+  ]
+  state_bucket              = module.state_bucket_303467602807.bucket_name
+  terraform_locks_table_arn = module.state_bucket_303467602807.lock_table_arn
+  read_only_permissions     = true
+}
+
 # SSM parameters in 303467602807 for backend discovery
 module "ci_cd_params_303467602807" {
   source = "./modules/ci-cd-params"
