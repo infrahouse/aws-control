@@ -29,3 +29,25 @@ provider "aws" {
     tags = local.default_tags
   }
 }
+
+provider "aws" {
+  alias  = "aws-338531211565-uw1"
+  region = "us-west-1"
+  assume_role {
+    role_arn = "arn:aws:iam::338531211565:role/AWSControlTowerExecution"
+  }
+  default_tags {
+    tags = local.default_tags
+  }
+}
+
+provider "aws" {
+  alias  = "aws-289256138624-uw1"
+  region = "us-west-1"
+  assume_role {
+    role_arn = "arn:aws:iam::289256138624:role/AWSControlTowerExecution"
+  }
+  default_tags {
+    tags = local.default_tags
+  }
+}
