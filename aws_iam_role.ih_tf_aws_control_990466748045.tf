@@ -25,9 +25,8 @@ module "ih_tf_aws_control_990466748045" {
     tolist(data.aws_iam_roles.sso_admin.arns)[0],
   ]
   allowed_arns = [
-    "arn:aws:iam::338531211565:role/AWSControlTowerExecution",
-    "arn:aws:iam::289256138624:role/AWSControlTowerExecution",
-    "arn:aws:iam::303467602807:role/AWSControlTowerExecution",
+    for id in local.managed_account_ids :
+    "arn:aws:iam::${id}:role/AWSControlTowerExecution"
   ]
 
   depends_on = [module.github_connector]
