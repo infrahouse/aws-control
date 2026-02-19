@@ -15,6 +15,7 @@ resource "aws_iam_policy" "github_cross_account" {
         Resource = [
           "arn:aws:iam::338531211565:role/AWSControlTowerExecution",
           "arn:aws:iam::289256138624:role/AWSControlTowerExecution",
+          "arn:aws:iam::303467602807:role/AWSControlTowerExecution",
         ]
       }
     ]
