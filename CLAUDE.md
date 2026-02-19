@@ -24,7 +24,7 @@ configuration managing core AWS infrastructure in the control account
 make bootstrap       # Set up local dev environment (installs hooks + pip deps)
 make lint            # Check code style (yamllint + terraform fmt -check)
 make format          # Auto-format Terraform files
-make plan            # terraform init + plan with configuration.tfvars
+make plan            # terraform init + plan
 make apply           # terraform apply from saved plan (tf.plan)
 ```
 
