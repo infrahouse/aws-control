@@ -22,12 +22,12 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help: ## Print this help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-.PHONY: hooks
-hooks:
+.PHONY: install-hooks
+install-hooks:
 	test -f .git/hooks/pre-commit || cp hooks/pre-commit .git/hooks/pre-commit
 
 .PHONY: bootstrap
-bootstrap: hooks  ## Build development environment
+bootstrap: install-hooks  ## Build development environment
 	pip install -r requirements.txt
 
 .PHONY: bootstrap-ci
@@ -52,7 +52,7 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	set -o pipefail ; terraform plan -no-color -var-file=configuration.tfvars --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
+	set -o pipefail ; terraform plan -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
 
 
 .PHONY: apply

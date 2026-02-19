@@ -38,8 +38,7 @@ eval $(ih-aws --aws-profile infrahouse-root-AWSAdministratorAccess credentials -
 make plan
 ```
 
-This runs `terraform init` followed by `terraform plan` with
-`configuration.tfvars`.
+This runs `terraform init` followed by `terraform plan`.
 
 ### Apply
 

@@ -13,7 +13,6 @@ locals {
 }
 resource "aws_identitystore_group" "sso" {
   for_each          = local.sso_groups
-  provider          = aws.aws-990466748045-uw1
   display_name      = each.key
   description       = each.value
   identity_store_id = local.identity_store_id
