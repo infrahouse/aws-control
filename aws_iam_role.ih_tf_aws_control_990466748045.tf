@@ -35,7 +35,7 @@ module "ih_tf_aws_control_990466748045" {
 
 # SSM parameters in 990466748045 for backend discovery
 module "ci_cd_params_990466748045" {
-  source = "./modules/ci-cd-params"
+  source                 = "./modules/ci-cd-params"
   repo_name              = "aws-control"
   state_bucket           = module.state_bucket_990466748045.bucket_name
   lock_table             = module.state_bucket_990466748045.lock_table_name
