@@ -6,9 +6,7 @@ terraform {
     assume_role = {
       role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control-state-manager"
     }
-
-
-    dynamodb_table = "infrahouse-terraform-state-locks"
+    dynamodb_table = "infrahouse-aws-control-990466748045-active-polecat"
     encrypt        = true
   }
   required_providers {
