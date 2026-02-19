@@ -38,37 +38,15 @@ module "ih_tf_aws_control_338531211565" {
 }
 
 # SSM parameters in 338531211565 for backend discovery
-resource "aws_ssm_parameter" "tf_state_bucket_338531211565" {
-  provider = aws.aws-338531211565-uw1
-  name     = "/terraform/backend/state_bucket"
-  type     = "String"
-  value    = module.state_bucket_338531211565.bucket_name
-}
-
-resource "aws_ssm_parameter" "tf_lock_table_338531211565" {
-  provider = aws.aws-338531211565-uw1
-  name     = "/terraform/backend/lock_table"
-  type     = "String"
-  value    = module.state_bucket_338531211565.lock_table_name
-}
-
-resource "aws_ssm_parameter" "tf_state_manager_role_arn_338531211565" {
-  provider = aws.aws-338531211565-uw1
-  name     = "/terraform/backend/state_manager_role_arn"
-  type     = "String"
-  value    = module.ih_tf_aws_control_338531211565.state_manager_role_arn
-}
-
-resource "aws_ssm_parameter" "tf_github_role_arn_338531211565" {
-  provider = aws.aws-338531211565-uw1
-  name     = "/terraform/ci-cd/github_role_arn"
-  type     = "String"
-  value    = module.ih_tf_aws_control_338531211565.github_role_arn
-}
-
-resource "aws_ssm_parameter" "tf_admin_role_arn_338531211565" {
-  provider = aws.aws-338531211565-uw1
-  name     = "/terraform/ci-cd/admin_role_arn"
-  type     = "String"
-  value    = module.ih_tf_aws_control_338531211565.admin_role_arn
+module "ci_cd_params_338531211565" {
+  source = "./modules/ci-cd-params"
+  providers = {
+    aws = aws.aws-338531211565-uw1
+  }
+  repo_name              = "aws-control-338531211565"
+  state_bucket           = module.state_bucket_338531211565.bucket_name
+  lock_table             = module.state_bucket_338531211565.lock_table_name
+  state_manager_role_arn = module.ih_tf_aws_control_338531211565.state_manager_role_arn
+  github_role_arn        = module.ih_tf_aws_control_338531211565.github_role_arn
+  admin_role_arn         = module.ih_tf_aws_control_338531211565.admin_role_arn
 }
