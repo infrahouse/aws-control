@@ -36,3 +36,17 @@ module "ih_tf_aws_control_338531211565" {
 
   depends_on = [module.github_connector_338531211565]
 }
+
+# SSM parameters in 338531211565 for backend discovery
+module "ci_cd_params_338531211565" {
+  source = "./modules/ci-cd-params"
+  providers = {
+    aws = aws.aws-338531211565-uw1
+  }
+  repo_name              = "aws-control-338531211565"
+  state_bucket           = module.state_bucket_338531211565.bucket_name
+  lock_table             = module.state_bucket_338531211565.lock_table_name
+  state_manager_role_arn = module.ih_tf_aws_control_338531211565.state_manager_role_arn
+  github_role_arn        = module.ih_tf_aws_control_338531211565.github_role_arn
+  admin_role_arn         = module.ih_tf_aws_control_338531211565.admin_role_arn
+}
