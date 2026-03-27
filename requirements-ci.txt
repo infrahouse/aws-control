@@ -1,4 +1,0 @@
-boto3 ~= 1.26
-infrahouse-toolkit ~=2.32
-pyhcl ~= 0.4
-yamllint ~= 1.29
