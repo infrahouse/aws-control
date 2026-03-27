@@ -52,7 +52,7 @@ jobs:
 
       # Prepare Python environment
       - name: Setup Python Environment
-        run: make bootstrap-ci
+        run: make bootstrap
 
       # Run all required linters
       - name: Code Style Check
