@@ -54,7 +54,7 @@ jobs:
 
       # Prepare Python environment
       - name: Setup Python Environment
-        run: make bootstrap-ci
+        run: make bootstrap
 
       # Download a plan from the approved pull request
       - name: Download plan
