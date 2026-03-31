@@ -1,0 +1,52 @@
+{
+  "accessManagement": {
+    "enabled": true
+  },
+  "securityRoles": {
+    "accountId": "076816212431"
+  },
+  "backup": {
+    "enabled": false
+  },
+  "governedRegions": [
+    "ca-central-1",
+    "ap-east-1",
+    "us-east-2",
+    "eu-south-1",
+    "ap-northeast-2",
+    "me-south-1",
+    "us-west-1",
+    "eu-west-1",
+    "eu-west-3",
+    "ap-southeast-2",
+    "eu-central-1",
+    "sa-east-1",
+    "us-east-1",
+    "ap-south-1",
+    "af-south-1",
+    "ap-northeast-3",
+    "us-west-2",
+    "eu-north-1",
+    "ap-northeast-1",
+    "ap-southeast-1",
+    "eu-west-2",
+    "ap-southeast-3"
+  ],
+  "organizationStructure": {
+    "security": {
+      "name": "Security"
+    }
+  },
+  "centralizedLogging": {
+    "accountId": "338531211565",
+    "configurations": {
+      "loggingBucket": {
+        "retentionDays": 365
+      },
+      "accessLoggingBucket": {
+        "retentionDays": 3650
+      }
+    },
+    "enabled": true
+  }
+}
