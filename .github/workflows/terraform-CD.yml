@@ -16,7 +16,7 @@ jobs:
     if: github.event.pull_request.merged
     runs-on: self-hosted
     environment: production
-    timeout-minutes: 5
+    timeout-minutes: 60
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
