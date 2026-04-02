@@ -1,15 +1,50 @@
 import {
-  to = aws_controltower_landing_zone.root
+  to = awscc_controltower_landing_zone.root
   id = "253SSA9Y0WZPC0ZN"
 }
 
-resource "aws_controltower_landing_zone" "root" {
-  manifest_json = file("${path.module}/files/LandingZoneManifest.json")
-  version       = "3.3"
+resource "awscc_controltower_landing_zone" "root" {
+  manifest = jsonencode({
+    accessManagement = {
+      enabled = true
+    }
+    securityRoles = {
+      accountId = "076816212431"
+    }
+    backup = {
+      enabled = false
+    }
+    governedRegions = [
+      "us-east-2",
+      "us-west-1",
+      "us-east-1",
+      "us-west-2",
+    ]
+    organizationStructure = {
+      security = {
+        name = "Security"
+      }
+    }
+    centralizedLogging = {
+      accountId = "338531211565"
+      configurations = {
+        loggingBucket = {
+          retentionDays = 365
+        }
+        accessLoggingBucket = {
+          retentionDays = 3650
+        }
+      }
+      enabled = true
+    }
+  })
+  version           = "3.3"
+  remediation_types = ["INHERITANCE_DRIFT"]
 }
 
 locals {
-  ct_home_region             = aws_controltower_landing_zone.root.region
+  # Parse region from the landing zone ARN: arn:aws:controltower:<region>:...
+  ct_home_region             = element(split(":", awscc_controltower_landing_zone.root.arn), 3)
   baseline_identity_center   = "arn:aws:controltower:${local.ct_home_region}::baseline/LN25R72TTG6IGPTQ"
   baseline_audit             = "arn:aws:controltower:${local.ct_home_region}::baseline/4T4HA1KMO10S6311"
   baseline_log_archive       = "arn:aws:controltower:${local.ct_home_region}::baseline/J8HX46AHS5MIKQPD"

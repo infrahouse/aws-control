@@ -73,3 +73,10 @@ provider "aws" {
     tags = local.default_tags
   }
 }
+
+provider "awscc" {
+  region = "us-west-1"
+  assume_role = {
+    role_arn = "arn:aws:iam::990466748045:role/ih-tf-aws-control-admin"
+  }
+}
