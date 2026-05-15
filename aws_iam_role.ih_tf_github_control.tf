@@ -17,7 +17,7 @@ module "ih_tf_github_control" {
     aws.cicd     = aws.aws-303467602807-uw1
     aws.tfstates = aws.aws-289256138624-uw1
   }
-  gh_org_name               = "infrahouse8"
+  gh_org_name               = "infrahouse"
   repo_name                 = "github-control"
   state_bucket              = module.state_bucket_github_control.bucket_name
   terraform_locks_table_arn = module.state_bucket_github_control.lock_table_arn
