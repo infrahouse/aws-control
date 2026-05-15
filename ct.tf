@@ -29,10 +29,10 @@ resource "awscc_controltower_landing_zone" "root" {
       accountId = "338531211565"
       configurations = {
         loggingBucket = {
-          retentionDays = 365
+          retentionDays = "365"
         }
         accessLoggingBucket = {
-          retentionDays = 3650
+          retentionDays = "3650"
         }
       }
       enabled = true
