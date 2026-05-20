@@ -1,11 +1,12 @@
 # State bucket for aws-control-338531211565 in the TF states account
 module "state_bucket_338531211565" {
   source  = "infrahouse/state-bucket/aws"
-  version = "2.2.0"
+  version = "3.0.0"
   providers = {
     aws = aws.aws-289256138624-uw1
   }
-  bucket = "infrahouse-aws-control-338531211565"
+  replication_region = "us-east-1"
+  bucket             = "infrahouse-aws-control-338531211565"
 }
 
 # OIDC provider for GitHub Actions in 338531211565
