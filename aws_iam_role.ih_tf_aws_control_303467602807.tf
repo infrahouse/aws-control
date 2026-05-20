@@ -1,11 +1,12 @@
 # State bucket for aws-control-303467602807 in the TF states account
 module "state_bucket_303467602807" {
   source  = "infrahouse/state-bucket/aws"
-  version = "2.2.0"
+  version = "3.0.0"
   providers = {
     aws = aws.aws-289256138624-uw1
   }
-  bucket = "infrahouse-aws-control-303467602807"
+  replication_region = local.dr_region
+  bucket             = "infrahouse-aws-control-303467602807"
 }
 
 # CI/CD roles for aws-control-303467602807
